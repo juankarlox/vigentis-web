@@ -1,5 +1,4 @@
-// Vigentis — navegación entre módulos (100% en el cliente, sin backend).
-// Sólo muestra/oculta secciones; no hay lectura ni escritura de datos reales.
+
 
 document.querySelectorAll('.rail-link').forEach(function (link) {
   link.addEventListener('click', function () {
