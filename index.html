@@ -7,13 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="Style.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="shell">
 
-  
+ 
   <aside class="rail">
     <div class="rail-brand">
       <span class="brand-mark" aria-hidden="true">
@@ -92,31 +92,71 @@
       </ul>
     </section>
 
-
+    
     <section class="view" id="activos" aria-labelledby="activos-h">
       <header class="view-head">
         <div>
           <h1 id="activos-h">Activos</h1>
           <p class="view-desc">Servidores, software y equipos que la organización necesita proteger.</p>
         </div>
-        <p class="view-stat"><strong>42</strong> activos registrados</p>
+        <div class="view-head-actions">
+          <p class="view-stat"><strong id="activos-count">42</strong> activos registrados</p>
+          <button class="btn btn-primary" id="btn-add-asset" type="button">+ Agregar activo</button>
+          <p class="hint-inline">Cambios en memoria — no se guardan al recargar (aún sin backend)</p>
+        </div>
       </header>
 
       <table class="data">
         <thead>
-          <tr><th>Código</th><th>Nombre</th><th>Tipo</th><th>Responsable</th><th>Criticidad</th><th>Estado</th></tr>
+          <tr><th>Código</th><th>Nombre</th><th>Tipo</th><th>Responsable</th><th>Criticidad</th><th>Estado</th><th class="col-actions">Acciones</th></tr>
         </thead>
-        <tbody>
-          <tr><td><code>SRV-014</code></td><td>Servidor de base de datos</td><td>Servidor</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
-          <tr><td><code>SRV-021</code></td><td>Servidor web principal</td><td>Servidor</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
-          <tr><td><code>NET-002</code></td><td>Firewall perimetral</td><td>Red</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
-          <tr><td><code>SW-007</code></td><td>ERP contable</td><td>Software</td><td>L. Gómez</td><td><span class="level level-med">Media</span></td><td>Activo</td></tr>
-          <tr><td><code>SW-012</code></td><td>Sistema de nómina</td><td>Software</td><td>L. Gómez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
-          <tr><td><code>WKS-034</code></td><td>Estación de trabajo — contabilidad</td><td>Equipo</td><td>R. Pérez</td><td><span class="level level-low">Baja</span></td><td>Activo</td></tr>
-          <tr><td><code>WKS-041</code></td><td>Portátil dirección general</td><td>Equipo</td><td>C. Rojas</td><td><span class="level level-med">Media</span></td><td>Activo</td></tr>
+        <tbody id="activos-body">
+          
         </tbody>
       </table>
     </section>
+
+    <div class="modal-overlay" id="asset-modal-overlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-head">
+          <h2 id="modal-title">Agregar activo</h2>
+          <button class="modal-close" id="modal-close-btn" type="button" aria-label="Cerrar">&times;</button>
+        </div>
+        <form id="asset-form">
+          <input type="hidden" id="asset-id">
+          <label class="field">
+            <span>Nombre del activo</span>
+            <input type="text" id="asset-name" required placeholder="Ej. Servidor de correo">
+          </label>
+          <label class="field">
+            <span>Tipo</span>
+            <select id="asset-type" required>
+              <option value="Servidor">Servidor</option>
+              <option value="Software">Software</option>
+              <option value="Equipo">Equipo</option>
+              <option value="Red">Red</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Responsable</span>
+            <input type="text" id="asset-owner" required placeholder="Ej. J. Martínez">
+          </label>
+          <label class="field">
+            <span>Criticidad</span>
+            <select id="asset-criticality" required>
+              <option value="Alta">Alta</option>
+              <option value="Media" selected>Media</option>
+              <option value="Baja">Baja</option>
+            </select>
+          </label>
+          <p class="field-hint" id="asset-code-hint"></p>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" id="modal-cancel-btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
 
     <section class="view" id="riesgos" aria-labelledby="riesgos-h">
@@ -168,7 +208,7 @@
       </table>
     </section>
 
-
+ 
     <section class="view" id="incidentes" aria-labelledby="incidentes-h">
       <header class="view-head">
         <div>
