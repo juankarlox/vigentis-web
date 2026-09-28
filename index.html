@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vigentis · Consola de gestión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  
+  <aside class="rail">
+    <div class="rail-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 2.5 4 5.5v6c0 5.2 3.4 8.9 8 10 4.6-1.1 8-4.8 8-10v-6L12 2.5Z"/>
+        </svg>
+      </span>
+      <span class="brand-name">Vigentis</span>
+    </div>
+    <p class="rail-tagline">Gestión de ciberseguridad<br>basada en ISO/IEC 27001</p>
+
+    <nav class="rail-nav" aria-label="Módulos">
+      <button class="rail-link is-active" data-target="resumen" type="button">Resumen</button>
+      <button class="rail-link" data-target="activos" type="button">Activos</button>
+      <button class="rail-link" data-target="riesgos" type="button">Riesgos</button>
+      <button class="rail-link" data-target="controles" type="button">Controles</button>
+      <button class="rail-link" data-target="incidentes" type="button">Incidentes</button>
+      <button class="rail-link" data-target="usuarios" type="button">Usuarios y roles</button>
+    </nav>
+
+    <div class="rail-foot">
+      <div class="rail-user">
+        <span class="rail-avatar">JA</span>
+        <span class="rail-user-info">
+          <span class="rail-user-name">Juan Arevalo</span>
+          <span class="rail-user-role">Administrador de TI</span>
+        </span>
+      </div>
+      <p class="rail-note">V1 · datos de ejemplo, sin conexión a datos reales</p>
+    </div>
+  </aside>
+
+
+  <main class="main">
+
+    <!-- RESUMEN -------------------------------------------------- -->
+    <section class="view is-active" id="resumen" aria-labelledby="resumen-h">
+      <header class="view-head">
+        <div>
+          <h1 id="resumen-h">Resumen</h1>
+          <p class="view-desc">Estado general de la seguridad de la información hoy, 24 de septiembre.</p>
+        </div>
+      </header>
+
+      <div class="hero-stat">
+        <span class="hero-num">3</span>
+        <span class="hero-label">riesgos de nivel alto siguen abiertos</span>
+      </div>
+
+      <dl class="stat-strip">
+        <div class="stat-item">
+          <dt>Activos registrados</dt>
+          <dd>42</dd>
+        </div>
+        <div class="stat-item">
+          <dt>Controles implementados</dt>
+          <dd>28<span class="stat-of">/40</span></dd>
+        </div>
+        <div class="stat-item">
+          <dt>Incidentes abiertos</dt>
+          <dd>2</dd>
+        </div>
+        <div class="stat-item">
+          <dt>Usuarios activos</dt>
+          <dd>4</dd>
+        </div>
+      </dl>
+
+      <h2 class="section-label">Actividad reciente</h2>
+      <ul class="activity">
+        <li><time datetime="2026-09-24T09:12">2026-09-24&nbsp;09:12</time><span>Riesgo <code>RSK-014</code> actualizado a estado <strong>En tratamiento</strong></span></li>
+        <li><time datetime="2026-09-23T16:40">2026-09-23&nbsp;16:40</time><span>Nuevo incidente <code>INC-008</code> registrado — Phishing dirigido</span></li>
+        <li><time datetime="2026-09-22T11:05">2026-09-22&nbsp;11:05</time><span>Control <code>A.8.2</code> marcado como <strong>Implementado</strong></span></li>
+        <li><time datetime="2026-09-21T08:30">2026-09-21&nbsp;08:30</time><span>Activo <code>SRV-014</code> dado de alta por J. Martínez</span></li>
+        <li><time datetime="2026-09-19T14:52">2026-09-19&nbsp;14:52</time><span>Riesgo <code>RSK-009</code> pasó de Abierto a <strong>Mitigado</strong></span></li>
+      </ul>
+    </section>
+
+
+    <section class="view" id="activos" aria-labelledby="activos-h">
+      <header class="view-head">
+        <div>
+          <h1 id="activos-h">Activos</h1>
+          <p class="view-desc">Servidores, software y equipos que la organización necesita proteger.</p>
+        </div>
+        <p class="view-stat"><strong>42</strong> activos registrados</p>
+      </header>
+
+      <table class="data">
+        <thead>
+          <tr><th>Código</th><th>Nombre</th><th>Tipo</th><th>Responsable</th><th>Criticidad</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>SRV-014</code></td><td>Servidor de base de datos</td><td>Servidor</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
+          <tr><td><code>SRV-021</code></td><td>Servidor web principal</td><td>Servidor</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
+          <tr><td><code>NET-002</code></td><td>Firewall perimetral</td><td>Red</td><td>J. Martínez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
+          <tr><td><code>SW-007</code></td><td>ERP contable</td><td>Software</td><td>L. Gómez</td><td><span class="level level-med">Media</span></td><td>Activo</td></tr>
+          <tr><td><code>SW-012</code></td><td>Sistema de nómina</td><td>Software</td><td>L. Gómez</td><td><span class="level level-high">Alta</span></td><td>Activo</td></tr>
+          <tr><td><code>WKS-034</code></td><td>Estación de trabajo — contabilidad</td><td>Equipo</td><td>R. Pérez</td><td><span class="level level-low">Baja</span></td><td>Activo</td></tr>
+          <tr><td><code>WKS-041</code></td><td>Portátil dirección general</td><td>Equipo</td><td>C. Rojas</td><td><span class="level level-med">Media</span></td><td>Activo</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <section class="view" id="riesgos" aria-labelledby="riesgos-h">
+      <header class="view-head">
+        <div>
+          <h1 id="riesgos-h">Riesgos</h1>
+          <p class="view-desc">Riesgos identificados sobre los activos, con su nivel y estado de tratamiento.</p>
+        </div>
+        <p class="view-stat"><strong>3</strong> de nivel alto</p>
+      </header>
+
+      <table class="data">
+        <thead>
+          <tr><th>Código</th><th>Riesgo</th><th>Activo</th><th>Probabilidad</th><th>Impacto</th><th>Nivel</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>RSK-014</code></td><td>Acceso no autorizado a la base de datos</td><td><code>SRV-014</code></td><td>Media</td><td>Alto</td><td><span class="dot dot-high"></span>Alto</td><td>En tratamiento</td></tr>
+          <tr><td><code>RSK-031</code></td><td>Phishing dirigido al personal</td><td>—</td><td>Alta</td><td>Alto</td><td><span class="dot dot-high"></span>Alto</td><td>En tratamiento</td></tr>
+          <tr><td><code>RSK-022</code></td><td>Software desactualizado</td><td><code>SW-007</code></td><td>Alta</td><td>Medio</td><td><span class="dot dot-high"></span>Alto</td><td>Abierto</td></tr>
+          <tr><td><code>RSK-009</code></td><td>Pérdida de datos por falta de respaldo</td><td><code>SRV-021</code></td><td>Baja</td><td>Alto</td><td><span class="dot dot-med"></span>Medio</td><td>Mitigado</td></tr>
+          <tr><td><code>RSK-005</code></td><td>Fallo del firewall perimetral</td><td><code>NET-002</code></td><td>Baja</td><td>Alto</td><td><span class="dot dot-med"></span>Medio</td><td>Mitigado</td></tr>
+          <tr><td><code>RSK-018</code></td><td>Uso de contraseñas débiles</td><td>—</td><td>Media</td><td>Bajo</td><td><span class="dot dot-low"></span>Bajo</td><td>Abierto</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <section class="view" id="controles" aria-labelledby="controles-h">
+      <header class="view-head">
+        <div>
+          <h1 id="controles-h">Controles</h1>
+          <p class="view-desc">Controles del Anexo A de ISO/IEC 27001 y su estado de implementación.</p>
+        </div>
+        <p class="view-stat"><strong>28/40</strong> implementados</p>
+      </header>
+
+      <table class="data">
+        <thead>
+          <tr><th>Código ISO</th><th>Control</th><th>Dominio</th><th>Responsable</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>A.5.1</code></td><td>Políticas de seguridad de la información</td><td>Organizacional</td><td>J. Martínez</td><td><span class="pill pill-ok">Implementado</span></td></tr>
+          <tr><td><code>A.5.24</code></td><td>Planificación de la gestión de incidentes</td><td>Organizacional</td><td>R. Pérez</td><td><span class="pill pill-ok">Implementado</span></td></tr>
+          <tr><td><code>A.6.3</code></td><td>Concienciación y formación en seguridad</td><td>Personas</td><td>L. Gómez</td><td><span class="pill pill-progress">En progreso</span></td></tr>
+          <tr><td><code>A.8.2</code></td><td>Clasificación de la información</td><td>Tecnológico</td><td>L. Gómez</td><td><span class="pill pill-ok">Implementado</span></td></tr>
+          <tr><td><code>A.8.9</code></td><td>Gestión de configuración</td><td>Tecnológico</td><td>—</td><td><span class="pill pill-none">No implementado</span></td></tr>
+          <tr><td><code>A.8.16</code></td><td>Actividades de monitoreo</td><td>Tecnológico</td><td>J. Martínez</td><td><span class="pill pill-progress">En progreso</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <section class="view" id="incidentes" aria-labelledby="incidentes-h">
+      <header class="view-head">
+        <div>
+          <h1 id="incidentes-h">Incidentes</h1>
+          <p class="view-desc">Eventos de seguridad registrados y su estado de resolución.</p>
+        </div>
+        <p class="view-stat"><strong>2</strong> abiertos</p>
+      </header>
+
+      <table class="data">
+        <thead>
+          <tr><th>Código</th><th>Tipo</th><th>Activo afectado</th><th>Fecha</th><th>Severidad</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>INC-008</code></td><td>Phishing</td><td>—</td><td>2026-09-23</td><td><span class="dot dot-high"></span>Alta</td><td>Abierto</td></tr>
+          <tr><td><code>INC-007</code></td><td>Acceso indebido</td><td><code>SRV-014</code></td><td>2026-09-15</td><td><span class="dot dot-med"></span>Media</td><td>Abierto</td></tr>
+          <tr><td><code>INC-006</code></td><td>Malware detectado</td><td><code>WKS-034</code></td><td>2026-08-30</td><td><span class="dot dot-high"></span>Alta</td><td>Cerrado</td></tr>
+          <tr><td><code>INC-005</code></td><td>Caída de servicio</td><td><code>SRV-021</code></td><td>2026-08-12</td><td><span class="dot dot-med"></span>Media</td><td>Cerrado</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <section class="view" id="usuarios" aria-labelledby="usuarios-h">
+      <header class="view-head">
+        <div>
+          <h1 id="usuarios-h">Usuarios y roles</h1>
+          <p class="view-desc">Personas con acceso a Vigentis y su rol dentro del sistema.</p>
+        </div>
+        <p class="view-stat"><strong>4</strong> usuarios activos</p>
+      </header>
+
+      <table class="data">
+        <thead>
+          <tr><th>Usuario</th><th>Rol</th><th>Correo</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>J. Martínez</td><td>Administrador de TI</td><td><code>jmartinez@empresa.com</code></td><td>Activo</td></tr>
+          <tr><td>L. Gómez</td><td>Analista de ciberseguridad</td><td><code>lgomez@empresa.com</code></td><td>Activo</td></tr>
+          <tr><td>R. Pérez</td><td>Auditor</td><td><code>rperez@empresa.com</code></td><td>Activo</td></tr>
+          <tr><td>C. Rojas</td><td>Responsable del SGSI</td><td><code>crojas@empresa.com</code></td><td>Activo</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
