@@ -5,6 +5,8 @@ Permite registrar y relacionar los activos, riesgos, controles, incidentes, audi
 
 > Vigentis **apoya** la gestión de un SGSI tomando la norma como referencia. No certifica organizaciones ni el software está certificado.
 
+**Úsalo en línea:** https://vigentis.onrender.com (la primera carga puede tardar ~1 minuto si el servidor estaba dormido).
+
 Proyecto Integrador I · Ingeniería de Sistemas · Universidad de Santander (Cúcuta) · Juan Carlos Arévalo Trujillo
 
 ## Módulos
