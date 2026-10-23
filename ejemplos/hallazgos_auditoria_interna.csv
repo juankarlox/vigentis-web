@@ -1,0 +1,5 @@
+﻿codigo;tipo;descripcion;control;fecha_limite
+H-01;NC_MENOR;No hay evidencia de revisión periódica de los derechos de acceso;A.5.18;2026-12-15
+H-02;NC_MAYOR;Las copias de seguridad del servidor de correo no se prueban;A.8.13;2026-11-30
+H-03;OBSERVACION;La política de contraseñas no se ha comunicado a todo el personal;A.5.17;
+H-04;OPORTUNIDAD_MEJORA;Registrar y revisar los eventos de inicio de sesión fallidos;A.8.15;

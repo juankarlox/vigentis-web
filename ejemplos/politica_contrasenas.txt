@@ -1,0 +1,6 @@
+POLÍTICA DE CONTRASEÑAS (documento de ejemplo para probar Vigentis)
+
+1. Las contraseñas deben tener al menos 12 caracteres.
+2. No se deben reutilizar las últimas 5 contraseñas.
+3. Las cuentas con acceso privilegiado deben usar autenticación de dos factores.
+4. Las contraseñas no se comparten ni se escriben en papel.

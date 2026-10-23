@@ -1,0 +1,16 @@
+# Archivos que suben los usuarios (documentos y evidencias): no van al repositorio
+archivos/
+
+# Dependencias y compilados
+node_modules/
+dist/
+target/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+*.log
+.env
+
+# Marca local del lanzador
+.acceso_creado
