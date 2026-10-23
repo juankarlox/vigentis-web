@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class InicializadorAdmin implements ApplicationRunner {
 
     private static final Logger log = LoggerFactory.getLogger(InicializadorAdmin.class);
-    private static final String CORREO = "admin@vigentis.local";
     private static final long EMPRESA_DEMO = 1L;
     private static final String CARACTERES = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
 
@@ -30,13 +29,19 @@ public class InicializadorAdmin implements ApplicationRunner {
     private final RolRepository roles;
     private final PasswordEncoder encoder;
     private final String claveConfigurada;
+    private final String nombre;
+    private final String correo;
 
     public InicializadorAdmin(UsuarioRepository usuarios, RolRepository roles, PasswordEncoder encoder,
-                              @Value("${VIGENTIS_ADMIN_CLAVE:}") String claveConfigurada) {
+                              @Value("${VIGENTIS_ADMIN_CLAVE:}") String claveConfigurada,
+                              @Value("${VIGENTIS_ADMIN_NOMBRE:Administrador}") String nombre,
+                              @Value("${VIGENTIS_ADMIN_CORREO:admin@vigentis.local}") String correo) {
         this.usuarios = usuarios;
         this.roles = roles;
         this.encoder = encoder;
         this.claveConfigurada = claveConfigurada;
+        this.nombre = nombre.isBlank() ? "Administrador" : nombre.trim();
+        this.correo = correo.isBlank() ? "admin@vigentis.local" : correo.trim().toLowerCase();
     }
 
     @Override
@@ -55,8 +60,8 @@ public class InicializadorAdmin implements ApplicationRunner {
 
         Usuario u = new Usuario();
         u.asignarEmpresa(EMPRESA_DEMO);
-        u.setNombre("Administrador");
-        u.setCorreo(CORREO);
+        u.setNombre(nombre);
+        u.setCorreo(correo);
         u.setRol(admin);
         u.setActivo(true);
         u.asignarHashClave(encoder.encode(clave));
@@ -72,9 +77,9 @@ public class InicializadorAdmin implements ApplicationRunner {
                   Anótala y cámbiala después de iniciar sesión.
                   (No se volverá a mostrar)
                 ============================================================
-                """, CORREO, clave);
+                """, correo, clave);
         } else {
-            log.warn("Administrador inicial creado: {} (contraseña tomada de VIGENTIS_ADMIN_CLAVE)", CORREO);
+            log.warn("Administrador inicial creado: {} (contraseña tomada de VIGENTIS_ADMIN_CLAVE)", correo);
         }
     }
 
