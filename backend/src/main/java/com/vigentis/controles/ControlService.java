@@ -17,7 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 public class ControlService {
 
     public record Resumen(long total, long aplican, long excluidos, long implementados,
-                          long enProgreso, long noImplementados, int porcentajeImplementacion) {}
+                          long enProgreso, long noImplementados, int porcentajeImplementacion,
+                          long sinJustificacion) {}
 
     private final ControlRepository repo;
     private final RiesgoRepository riesgos;
@@ -47,9 +48,11 @@ public class ControlService {
     public Control actualizar(Long id, ControlRequest d) {
         Control c = obtener(id);
         String justificacion = Textos.limpio(d.justificacion());
-        if (!d.aplica() && justificacion == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Si el control no aplica, debes justificar la exclusión");
+        // ISO/IEC 27001 6.1.3 d: la Declaración de Aplicabilidad justifica tanto las inclusiones como las exclusiones
+        if (justificacion == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, d.aplica()
+                    ? "Debes justificar por qué el control aplica (inclusión)"
+                    : "Si el control no aplica, debes justificar la exclusión");
         }
         c.setAplica(d.aplica());
         c.setJustificacion(justificacion);
@@ -71,7 +74,8 @@ public class ControlService {
         long prog = todos.stream().filter(c -> c.getAplica() && c.getEstado() == Control.Estado.EN_PROGRESO).count();
         long noImpl = aplican - impl - prog;
         int porcentaje = aplican == 0 ? 0 : (int) Math.round(impl * 100.0 / aplican);
-        return new Resumen(todos.size(), aplican, todos.size() - aplican, impl, prog, noImpl, porcentaje);
+        long sinJustificar = todos.stream().filter(c -> Textos.limpio(c.getJustificacion()) == null).count();
+        return new Resumen(todos.size(), aplican, todos.size() - aplican, impl, prog, noImpl, porcentaje, sinJustificar);
     }
 
     @Transactional(readOnly = true)

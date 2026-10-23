@@ -35,6 +35,7 @@ export default function Controles() {
           <div className="stat-item"><dt>Implementados</dt><dd>{r.implementados}</dd></div>
           <div className="stat-item"><dt>En progreso</dt><dd>{r.enProgreso}</dd></div>
           <div className="stat-item"><dt>Avance</dt><dd>{r.porcentajeImplementacion}%</dd></div>
+          <div className="stat-item"><dt>Sin justificar</dt><dd>{r.sinJustificacion} <span className="stat-of">de {r.total}</span></dd></div>
         </dl>
       )}
 
@@ -59,7 +60,9 @@ export default function Controles() {
                 {datos?.map((c) => (
                   <tr key={c.id} className="clickable" onClick={() => setEditando(c)}>
                     <td><code>{c.codigoIso}</code></td>
-                    <td>{c.nombre}{!c.aplica && c.justificacion && <span className="sub">Excluido: {c.justificacion}</span>}</td>
+                    <td>{c.nombre}{c.justificacion
+                      ? <span className="sub">{c.aplica ? 'Aplica' : 'Excluido'}: {c.justificacion}</span>
+                      : <span className="sub" style={{ color: 'var(--danger)' }}>Falta justificar</span>}</td>
                     <td>{etiqueta(c.tema)}</td>
                     <td>{c.aplica ? 'Sí' : <span className="pill pill-neutral">No aplica</span>}</td>
                     <td>{c.aplica ? <Estado valor={c.estado} /> : <span className="muted">—</span>}</td>
@@ -115,8 +118,10 @@ function DetalleControl({ control, gestionar, responsables, onCerrar, onGuardado
             <input type="checkbox" checked={v.aplica} onChange={(e) => set('aplica')(e.target.checked)} />
             Este control aplica a la organización
           </label>
-          <Campo etiqueta={v.aplica ? 'Justificación (opcional)' : 'Justificación de la exclusión (obligatoria)'}>
-            <textarea value={v.justificacion} onChange={set('justificacion')} required={!v.aplica} />
+          <Campo etiqueta={v.aplica ? 'Justificación de la inclusión (obligatoria)' : 'Justificación de la exclusión (obligatoria)'}
+            ayuda="La Declaración de Aplicabilidad debe justificar tanto los controles incluidos como los excluidos (ISO/IEC 27001, 6.1.3 d).">
+            <textarea value={v.justificacion} onChange={set('justificacion')} required maxLength={1000}
+              placeholder={v.aplica ? 'Ej.: Reduce el riesgo RSG-001 de acceso no autorizado al correo' : 'Ej.: La organización no desarrolla software propio'} />
           </Campo>
           {v.aplica && (
             <div className="field-row">
